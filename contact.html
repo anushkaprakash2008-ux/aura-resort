@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Aura Resort</title>
+  <meta name="description" content="Contact Aura Resort for reservations, inquiries, and special requests. Our team is here to help.">
+  <link rel="canonical" href="contact.html">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+     PREMIUM NAVBAR
+     ========================================== -->
+  <header class="navbar-wrapper" id="navbarWrapper">
+    <div class="navbar-bg">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=85" alt="Aura Resort" loading="lazy">
+    </div>
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo" aria-label="Aura Resort Home">
+        <div class="logo-text">
+          <span class="aura">AURA</span>
+          <span class="resort">RESORT</span>
+          <span class="tagline">RELAX · REFRESH · COMFORT</span>
+        </div>
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li class="nav-item"><a href="rooms.html" class="nav-link">ROOMS</a></li>
+        <li class="nav-item"><a href="amenities.html" class="nav-link">AMENITIES</a></li>
+        <li class="nav-item"><a href="dining.html" class="nav-link">DINING</a></li>
+        <li class="nav-item"><a href="banquet.html" class="nav-link">BANQUET</a></li>
+        <li class="nav-item"><a href="gallery.html" class="nav-link">GALLERY</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link active">CONTACT</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="profile.html" class="nav-link" id="profile-link">PROFILE</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="#" class="nav-link" id="logout-link">LOGOUT</a></li>
+        <li class="nav-item auth-logged-out"><a href="login.html" class="nav-link" id="login-link">LOGIN</a></li>
+        <li class="nav-item auth-logged-out"><a href="signup.html" class="nav-link" id="signup-link">SIGNUP</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <a href="room-booking.html" class="btn-book">BOOK NOW</a>
+        <button class="navbar-toggle" id="navToggle" aria-label="Toggle Navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="index.html" class="nav-link">HOME</a>
+    <a href="about.html" class="nav-link">ABOUT</a>
+    <a href="rooms.html" class="nav-link">ROOMS</a>
+    <a href="amenities.html" class="nav-link">AMENITIES</a>
+    <a href="dining.html" class="nav-link">DINING</a>
+    <a href="banquet.html" class="nav-link">BANQUET</a>
+    <a href="gallery.html" class="nav-link">GALLERY</a>
+    <a href="contact.html" class="nav-link active">CONTACT</a>
+    <a href="profile.html" class="nav-link auth-logged-in" id="mobile-profile-link" style="display: none;">PROFILE</a>
+    <a href="#" class="nav-link auth-logged-in" id="mobile-logout-link" style="display: none;">LOGOUT</a>
+    <a href="login.html" class="nav-link auth-logged-out" id="mobile-login-link">LOGIN</a>
+    <a href="signup.html" class="nav-link auth-logged-out" id="mobile-signup-link">SIGNUP</a>
+    <a href="room-booking.html" class="btn-book-mobile">BOOK NOW</a>
+  </div>
+
+  <section class="page-hero">
+    <video autoplay loop muted playsinline preload="auto" class="page-hero-video">
+      <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+      <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+    </video>
+    <div class="page-hero-content">
+      <span class="eyebrow eyebrow-light">GET IN TOUCH</span>
+      <h1 class="page-hero-title">CONTACT US</h1>
+      <p class="page-hero-sub">Our team is here to assist you with reservations, inquiries, and special requests.</p>
+    </div>
+  </section>
+
+  <section class="section bg-ivory">
+    <div class="container">
+      <div class="contact-layout">
+        <div class="contact-info-panel">
+          <div>
+            <span class="eyebrow">CONCIERGE & RECEPTION</span>
+            <h2 class="headline-sm">WE ARE HERE FOR YOU</h2>
+            <p class="intro-text">Whether planning a romantic getaway, family vacation, or corporate event, we welcome your call or message.</p>
+          </div>
+
+          <div class="contact-detail-block">
+            <h4>RESORT LOCATION</h4>
+            <p class="room-desc">Marine Drive, Circuit House Area, Jamshedpur<br>Jharkhand 831001, India</p>
+          </div>
+
+          <div class="contact-detail-block">
+            <h4>RESERVATIONS</h4>
+            <p class="room-desc">Phone: +91 91234 56789<br>Email: reservations@auraresort.com</p>
+          </div>
+
+          <div class="contact-detail-block">
+            <h4>GENERAL INQUIRIES</h4>
+            <p class="room-desc">Email: info@auraresort.com<br>Phone: +91 (0657) 2345678</p>
+          </div>
+
+          <div class="contact-map-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117711.91653424194!2d86.12648792070313!3d22.804566499999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5e31989f0e2b5%3A0xcd98d022b7a97750!2sJamshedpur%2C%20Jharkhand!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="map-overlay-badge">
+              <span class="eyebrow eyebrow-light mb-0">LOCATION</span>
+              <div class="quote-text mb-0">Jamshedpur, Jharkhand</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <span class="eyebrow">INQUIRY FORM</span>
+          <h2 class="headline-auth">SEND A MESSAGE</h2>
+
+          <form id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">YOUR FULL NAME *</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="contact-email" class="form-label">EMAIL ADDRESS *</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-phone" class="form-label">PHONE NUMBER</label>
+              <input type="tel" id="contact-phone" class="form-input" placeholder="+91 800-555-0000">
+            </div>
+            <div class="form-group">
+              <label for="contact-subject" class="form-label">SUBJECT</label>
+              <select id="contact-subject" class="form-select">
+                <option value="Reservation Inquiry">Reservation Inquiry</option>
+                <option value="Room Availability">Room Availability</option>
+                <option value="Restaurant Booking">Restaurant Booking</option>
+                <option value="Banquet & Events">Banquet & Events</option>
+                <option value="General Inquiry">General Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contact-message" class="form-label">YOUR MESSAGE *</label>
+              <textarea id="contact-message" class="form-textarea" placeholder="Please share your message, dates, or special requests..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-full">SEND MESSAGE <span class="arrow">→</span></button>
+            <div class="form-feedback" id="contact-feedback"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">AURA RESORT</div>
+          <div class="footer-tagline">RELAX · REFRESH · COMFORT</div>
+          <p class="footer-desc">Experience unparalleled luxury and comfort at Aura Resort.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">QUICK LINKS</div>
+          <ul class="footer-nav-list">
+            <li><a href="about.html" class="footer-nav-link">About Us</a></li>
+            <li><a href="rooms.html" class="footer-nav-link">Rooms</a></li>
+            <li><a href="amenities.html" class="footer-nav-link">Amenities</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">BOOKINGS</div>
+          <ul class="footer-nav-list">
+            <li><a href="room-booking.html" class="footer-nav-link">Room Booking</a></li>
+            <li><a href="restaurant-booking.html" class="footer-nav-link">Restaurant Booking</a></li>
+            <li><a href="banquet-booking.html" class="footer-nav-link">Banquet Booking</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">CONTACT</div>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item"><i class="bi bi-geo-alt"></i><span>Marine Drive, Jamshedpur, Jharkhand</span></div>
+            <div class="footer-contact-item"><i class="bi bi-telephone"></i><span>+91 800-555-AURA</span></div>
+            <div class="footer-contact-item"><i class="bi bi-envelope"></i><span>info@auraresort.com</span></div>
+          </div>
+          <a href="room-booking.html" class="btn btn-gold w-full">BOOK NOW <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Aura Resort. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

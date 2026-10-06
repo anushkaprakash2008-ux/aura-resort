@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    if (!localStorage.getItem('aura_current_user')) {
+      sessionStorage.setItem('aura_auth_msg', 'Access Restricted: Please Login or Signup first to access this page.');
+      window.location.replace('login.html');
+    }
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Booking — Aura Resort</title>
+  <meta name="description" content="Book your stay at Aura Resort. Choose room type, dates, and number of guests.">
+  <link rel="canonical" href="room-booking.html">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+     PREMIUM NAVBAR
+     ========================================== -->
+  <header class="navbar-wrapper" id="navbarWrapper">
+    <div class="navbar-bg">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=85" alt="Aura Resort" loading="lazy">
+    </div>
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo" aria-label="Aura Resort Home">
+        <div class="logo-text">
+          <span class="aura">AURA</span>
+          <span class="resort">RESORT</span>
+          <span class="tagline">RELAX · REFRESH · COMFORT</span>
+        </div>
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li class="nav-item"><a href="rooms.html" class="nav-link">ROOMS</a></li>
+        <li class="nav-item"><a href="amenities.html" class="nav-link">AMENITIES</a></li>
+        <li class="nav-item"><a href="dining.html" class="nav-link">DINING</a></li>
+        <li class="nav-item"><a href="banquet.html" class="nav-link">BANQUET</a></li>
+        <li class="nav-item"><a href="gallery.html" class="nav-link">GALLERY</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="profile.html" class="nav-link" id="profile-link">PROFILE</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="#" class="nav-link" id="logout-link">LOGOUT</a></li>
+        <li class="nav-item auth-logged-out"><a href="login.html" class="nav-link" id="login-link">LOGIN</a></li>
+        <li class="nav-item auth-logged-out"><a href="signup.html" class="nav-link" id="signup-link">SIGNUP</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <a href="room-booking.html" class="btn-book">BOOK NOW</a>
+        <button class="navbar-toggle" id="navToggle" aria-label="Toggle Navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="index.html" class="nav-link">HOME</a>
+    <a href="about.html" class="nav-link">ABOUT</a>
+    <a href="rooms.html" class="nav-link">ROOMS</a>
+    <a href="amenities.html" class="nav-link">AMENITIES</a>
+    <a href="dining.html" class="nav-link">DINING</a>
+    <a href="banquet.html" class="nav-link">BANQUET</a>
+    <a href="gallery.html" class="nav-link">GALLERY</a>
+    <a href="contact.html" class="nav-link">CONTACT</a>
+    <a href="profile.html" class="nav-link auth-logged-in" id="mobile-profile-link" style="display: none;">PROFILE</a>
+    <a href="#" class="nav-link auth-logged-in" id="mobile-logout-link" style="display: none;">LOGOUT</a>
+    <a href="login.html" class="nav-link auth-logged-out" id="mobile-login-link">LOGIN</a>
+    <a href="signup.html" class="nav-link auth-logged-out" id="mobile-signup-link">SIGNUP</a>
+    <a href="room-booking.html" class="btn-book-mobile">BOOK NOW</a>
+  </div>
+
+  <section class="page-hero">
+    <video autoplay loop muted playsinline preload="auto" class="page-hero-video">
+      <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+      <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+    </video>
+    <div class="page-hero-content">
+      <span class="eyebrow eyebrow-light">ONLINE RESERVATION</span>
+      <h1 class="page-hero-title">ROOM BOOKING</h1>
+      <p class="page-hero-sub">Book your stay at Aura Resort and experience luxury and comfort.</p>
+    </div>
+  </section>
+
+  <section class="section bg-ivory">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm p-4">
+            <span class="eyebrow">FILL THE FORM</span>
+            <h2 class="mb-3">Room Booking</h2>
+
+            <form id="room-booking-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="full-name" class="form-label">FULL NAME *</label>
+                  <input type="text" id="full-name" class="form-input" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">EMAIL *</label>
+                  <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="mobile" class="form-label">MOBILE NUMBER *</label>
+                <input type="tel" id="mobile" class="form-input" placeholder="+91 800-555-0000" required>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="id-type" class="form-label">GOVERNMENT ID TYPE *</label>
+                  <select id="id-type" class="form-select" required>
+                    <option value="">Select ID Type</option>
+                    <option value="Aadhaar Card">Aadhaar Card</option>
+                    <option value="Passport">Passport</option>
+                    <option value="Driving Licence">Driving Licence</option>
+                    <option value="Voter ID">Voter ID</option>
+                    <option value="PAN Card">PAN Card</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="id-number" class="form-label">ID NUMBER *</label>
+                  <input type="text" id="id-number" class="form-input" placeholder="Enter ID number" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="room-type" class="form-label">ROOM TYPE *</label>
+                  <select id="room-type" class="form-select" required>
+                    <option value="deluxe">Deluxe Room — ₹3,000/Night</option>
+                    <option value="premium">Premium Room — ₹4,500/Night</option>
+                    <option value="suite">Suite Room — ₹6,000/Night</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="num-rooms" class="form-label">NUMBER OF ROOMS *</label>
+                  <input type="number" id="num-rooms" class="form-input" value="1" min="1" max="5" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="check-in" class="form-label">CHECK-IN DATE *</label>
+                  <input type="date" id="check-in" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="check-out" class="form-label">CHECK-OUT DATE *</label>
+                  <input type="date" id="check-out" class="form-input" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="num-guests" class="form-label">NUMBER OF GUESTS *</label>
+                <input type="number" id="num-guests" class="form-input" value="2" min="1" max="10" required>
+              </div>
+
+              <div class="bg-ivory-soft p-4 rounded mb-3">
+                <h4>Booking Summary</h4>
+                <div class="row">
+                  <div class="col-6">Number of Nights:</div>
+                  <div class="col-6 text-end fw-bold" id="total-nights">0</div>
+                </div>
+                <div class="row">
+                  <div class="col-6">Total Amount:</div>
+                  <div class="col-6 text-end fw-bold text-gold-dark" id="total-amount">₹0</div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-full">PROCEED TO PAYMENT <span class="arrow">→</span></button>
+              <div class="form-feedback" id="booking-feedback"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">AURA RESORT</div>
+          <div class="footer-tagline">RELAX · REFRESH · COMFORT</div>
+          <p class="footer-desc">Experience unparalleled luxury and comfort at Aura Resort.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">QUICK LINKS</div>
+          <ul class="footer-nav-list">
+            <li><a href="about.html" class="footer-nav-link">About Us</a></li>
+            <li><a href="rooms.html" class="footer-nav-link">Rooms</a></li>
+            <li><a href="amenities.html" class="footer-nav-link">Amenities</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">BOOKINGS</div>
+          <ul class="footer-nav-list">
+            <li><a href="room-booking.html" class="footer-nav-link">Room Booking</a></li>
+            <li><a href="restaurant-booking.html" class="footer-nav-link">Restaurant Booking</a></li>
+            <li><a href="banquet-booking.html" class="footer-nav-link">Banquet Booking</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">CONTACT</div>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item"><i class="bi bi-geo-alt"></i><span>Marine Drive, Jamshedpur, Jharkhand</span></div>
+            <div class="footer-contact-item"><i class="bi bi-telephone"></i><span>+91 800-555-AURA</span></div>
+            <div class="footer-contact-item"><i class="bi bi-envelope"></i><span>info@auraresort.com</span></div>
+          </div>
+          <a href="room-booking.html" class="btn btn-gold w-full">BOOK NOW <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Aura Resort. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

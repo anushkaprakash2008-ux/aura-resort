@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Details — Aura Resort</title>
+  <meta name="description" content="Detailed view of our luxurious rooms at Aura Resort. View amenities, facilities, and book your stay.">
+  <link rel="canonical" href="room-details.html">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+     PREMIUM NAVBAR
+     ========================================== -->
+  <header class="navbar-wrapper" id="navbarWrapper">
+    <div class="navbar-bg">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=85" alt="Aura Resort" loading="lazy">
+    </div>
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo" aria-label="Aura Resort Home">
+        <div class="logo-text">
+          <span class="aura">AURA</span>
+          <span class="resort">RESORT</span>
+          <span class="tagline">RELAX · REFRESH · COMFORT</span>
+        </div>
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link">HOME</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li class="nav-item"><a href="rooms.html" class="nav-link">ROOMS</a></li>
+        <li class="nav-item"><a href="amenities.html" class="nav-link">AMENITIES</a></li>
+        <li class="nav-item"><a href="dining.html" class="nav-link">DINING</a></li>
+        <li class="nav-item"><a href="banquet.html" class="nav-link">BANQUET</a></li>
+        <li class="nav-item"><a href="gallery.html" class="nav-link">GALLERY</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="profile.html" class="nav-link" id="profile-link">PROFILE</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="#" class="nav-link" id="logout-link">LOGOUT</a></li>
+        <li class="nav-item auth-logged-out"><a href="login.html" class="nav-link" id="login-link">LOGIN</a></li>
+        <li class="nav-item auth-logged-out"><a href="signup.html" class="nav-link" id="signup-link">SIGNUP</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <a href="room-booking.html" class="btn-book">BOOK NOW</a>
+        <button class="navbar-toggle" id="navToggle" aria-label="Toggle Navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="index.html" class="nav-link">HOME</a>
+    <a href="about.html" class="nav-link">ABOUT</a>
+    <a href="rooms.html" class="nav-link">ROOMS</a>
+    <a href="amenities.html" class="nav-link">AMENITIES</a>
+    <a href="dining.html" class="nav-link">DINING</a>
+    <a href="banquet.html" class="nav-link">BANQUET</a>
+    <a href="gallery.html" class="nav-link">GALLERY</a>
+    <a href="contact.html" class="nav-link">CONTACT</a>
+    <a href="profile.html" class="nav-link auth-logged-in" id="mobile-profile-link" style="display: none;">PROFILE</a>
+    <a href="#" class="nav-link auth-logged-in" id="mobile-logout-link" style="display: none;">LOGOUT</a>
+    <a href="login.html" class="nav-link auth-logged-out" id="mobile-login-link">LOGIN</a>
+    <a href="signup.html" class="nav-link auth-logged-out" id="mobile-signup-link">SIGNUP</a>
+    <a href="room-booking.html" class="btn-book-mobile">BOOK NOW</a>
+  </div>
+
+  <section class="page-hero">
+    <video autoplay loop muted playsinline preload="auto" class="page-hero-video">
+      <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+      <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+    </video>
+    <div class="page-hero-content">
+      <span class="eyebrow eyebrow-light">ROOM DETAILS</span>
+      <h1 class="page-hero-title" id="room-name-display">DELUXE ROOM</h1>
+      <p class="page-hero-sub" id="room-price-display">₹3,000 / Night</p>
+    </div>
+  </section>
+
+  <section class="section bg-ivory">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-7">
+          <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85" alt="Room" class="img-fluid rounded shadow" id="room-main-img">
+          
+          <div class="row g-2 mt-3">
+            <div class="col-4">
+              <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=400&q=85" alt="Room View 1" class="img-fluid rounded" id="room-img-1">
+            </div>
+            <div class="col-4">
+              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=400&q=85" alt="Room View 2" class="img-fluid rounded" id="room-img-2">
+            </div>
+            <div class="col-4">
+              <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=400&q=85" alt="Room View 3" class="img-fluid rounded" id="room-img-3">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <span class="eyebrow">OVERVIEW</span>
+          <h2 id="room-name">DELUXE ROOM</h2>
+          <span class="line-decor"></span>
+          <p class="intro-text" id="room-description">Experience comfort in our Deluxe Room featuring elegant decor, premium amenities, and a serene garden view. Perfect for couples and solo travelers.</p>
+
+          <div class="row g-3 mt-3">
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-people text-gold"></i> <span>2 Guests</span></div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-arrows-angle-expand text-gold"></i> <span id="room-size">300 SQFT</span></div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-eye text-gold"></i> <span id="room-view">Garden View</span></div>
+            </div>
+            <div class="col-6">
+              <div class="d-flex align-items-center gap-2"><i class="bi bi-bed text-gold"></i> <span>King Bed</span></div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <h4>Room Facilities</h4>
+            <ul class="row g-2 mt-2" id="room-facilities">
+              <li class="col-6"><i class="bi bi-check-circle-fill text-gold me-1"></i> Free Wi-Fi</li>
+              <li class="col-6"><i class="bi bi-check-circle-fill text-gold me-1"></i> Flat-screen TV</li>
+              <li class="col-6"><i class="bi bi-check-circle-fill text-gold me-1"></i> Air Conditioning</li>
+              <li class="col-6"><i class="bi bi-check-circle-fill text-gold me-1"></i> En-suite Bathroom</li>
+              <li class="col-6"><i class="bi bi-check-circle-fill text-gold me-1"></i> Tea/Coffee Maker</li>
+              <li class="col-6"><i class="bi bi-check-circle-fill text-gold me-1"></i> 24/7 Room Service</li>
+            </ul>
+          </div>
+
+          <div class="mt-4 p-4 bg-ivory-soft rounded border">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="room-price" id="room-price-large">₹3,000</div>
+                <div class="spec-label">PER NIGHT</div>
+              </div>
+              <a href="room-booking.html" class="btn btn-primary">BOOK NOW <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">AURA RESORT</div>
+          <div class="footer-tagline">RELAX · REFRESH · COMFORT</div>
+          <p class="footer-desc">Experience unparalleled luxury and comfort at Aura Resort.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-link"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">QUICK LINKS</div>
+          <ul class="footer-nav-list">
+            <li><a href="about.html" class="footer-nav-link">About Us</a></li>
+            <li><a href="rooms.html" class="footer-nav-link">Rooms</a></li>
+            <li><a href="amenities.html" class="footer-nav-link">Amenities</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">BOOKINGS</div>
+          <ul class="footer-nav-list">
+            <li><a href="room-booking.html" class="footer-nav-link">Room Booking</a></li>
+            <li><a href="restaurant-booking.html" class="footer-nav-link">Restaurant Booking</a></li>
+            <li><a href="banquet-booking.html" class="footer-nav-link">Banquet Booking</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">CONTACT</div>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item"><i class="bi bi-geo-alt"></i><span>Marine Drive, Jamshedpur, Jharkhand</span></div>
+            <div class="footer-contact-item"><i class="bi bi-telephone"></i><span>+91 800-555-AURA</span></div>
+            <div class="footer-contact-item"><i class="bi bi-envelope"></i><span>info@auraresort.com</span></div>
+          </div>
+          <a href="room-booking.html" class="btn btn-gold w-full">BOOK NOW <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>© 2026 Aura Resort. All Rights Reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const room = params.get('room') || 'deluxe';
+      
+      const rooms = {
+        deluxe: {
+          name: 'DELUXE ROOM',
+          price: '₹3,000',
+          size: '300 SQFT',
+          view: 'Garden View',
+          description: 'Experience comfort in our Deluxe Room featuring elegant decor, premium amenities, and a serene garden view. Perfect for couples and solo travelers.',
+          img: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85',
+          facilities: ['Free Wi-Fi', 'Flat-screen TV', 'Air Conditioning', 'En-suite Bathroom', 'Tea/Coffee Maker', '24/7 Room Service']
+        },
+        premium: {
+          name: 'PREMIUM ROOM',
+          price: '₹4,500',
+          size: '450 SQFT',
+          view: 'Pool View',
+          description: 'Indulge in luxury with our Premium Room featuring spacious interiors, modern amenities, and a stunning pool view. Ideal for a romantic getaway.',
+          img: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85',
+          facilities: ['Free Wi-Fi', 'Flat-screen TV', 'Air Conditioning', 'En-suite Bathroom', 'Tea/Coffee Maker', '24/7 Room Service', 'Mini Bar', 'Pool View Balcony']
+        },
+        suite: {
+          name: 'SUITE ROOM',
+          price: '₹6,000',
+          size: '650 SQFT',
+          view: 'Ocean View',
+          description: 'Experience the epitome of luxury in our Suite Room with a separate living area, premium amenities, and breathtaking ocean views. Perfect for families.',
+          img: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85',
+          facilities: ['Free Wi-Fi', 'Flat-screen TV', 'Air Conditioning', 'En-suite Bathroom', 'Tea/Coffee Maker', '24/7 Room Service', 'Mini Bar', 'Ocean View Balcony', 'Separate Living Area', 'Jacuzzi Tub']
+        }
+      };
+
+      const data = rooms[room] || rooms.deluxe;
+      
+      document.getElementById('room-name-display').textContent = data.name;
+      document.getElementById('room-price-display').textContent = data.price + ' / Night';
+      document.getElementById('room-main-img').src = data.img;
+      document.getElementById('room-name').textContent = data.name;
+      document.getElementById('room-description').textContent = data.description;
+      document.getElementById('room-size').textContent = data.size;
+      document.getElementById('room-view').textContent = data.view;
+      document.getElementById('room-price-large').textContent = data.price;
+
+      const facilitiesList = document.getElementById('room-facilities');
+      facilitiesList.innerHTML = '';
+      data.facilities.forEach(f => {
+        const li = document.createElement('li');
+        li.className = 'col-6';
+        li.innerHTML = `<i class="bi bi-check-circle-fill text-gold me-1"></i> ${f}`;
+        facilitiesList.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>

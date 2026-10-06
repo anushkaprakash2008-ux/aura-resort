@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aura Resort — Relax, Refresh and Experience Comfort</title>
+  <meta name="description" content="Welcome to Aura Resort. Relax, Refresh and Experience Comfort at our luxury resort.">
+  <link rel="canonical" href="index.html">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================
+     PREMIUM NAVBAR
+     ========================================== -->
+  <header class="navbar-wrapper" id="navbarWrapper">
+    <div class="navbar-bg">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=2000&q=85" alt="Aura Resort" loading="lazy">
+    </div>
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo" aria-label="Aura Resort Home">
+        <div class="logo-text">
+          <span class="aura">AURA</span>
+          <span class="resort">RESORT</span>
+          <span class="tagline">RELAX · REFRESH · COMFORT</span>
+        </div>
+      </a>
+
+      <div class="nav-divider"></div>
+
+      <ul class="navbar-nav">
+        <li class="nav-item"><a href="index.html" class="nav-link active">HOME</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">ABOUT</a></li>
+        <li class="nav-item"><a href="rooms.html" class="nav-link">ROOMS</a></li>
+        <li class="nav-item"><a href="amenities.html" class="nav-link">AMENITIES</a></li>
+        <li class="nav-item"><a href="dining.html" class="nav-link">DINING</a></li>
+        <li class="nav-item"><a href="banquet.html" class="nav-link">BANQUET</a></li>
+        <li class="nav-item"><a href="gallery.html" class="nav-link">GALLERY</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">CONTACT</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="profile.html" class="nav-link" id="profile-link">PROFILE</a></li>
+        <li class="nav-item auth-logged-in" style="display: none;"><a href="#" class="nav-link" id="logout-link">LOGOUT</a></li>
+        <li class="nav-item auth-logged-out"><a href="login.html" class="nav-link" id="login-link">LOGIN</a></li>
+        <li class="nav-item auth-logged-out"><a href="signup.html" class="nav-link" id="signup-link">SIGNUP</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <a href="room-booking.html" class="btn-book">BOOK NOW</a>
+        <button class="navbar-toggle" id="navToggle" aria-label="Toggle Navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-backdrop" id="mobileBackdrop"></div>
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="index.html" class="nav-link active">HOME</a>
+    <a href="about.html" class="nav-link">ABOUT</a>
+    <a href="rooms.html" class="nav-link">ROOMS</a>
+    <a href="amenities.html" class="nav-link">AMENITIES</a>
+    <a href="dining.html" class="nav-link">DINING</a>
+    <a href="banquet.html" class="nav-link">BANQUET</a>
+    <a href="gallery.html" class="nav-link">GALLERY</a>
+    <a href="contact.html" class="nav-link">CONTACT</a>
+    <a href="profile.html" class="nav-link auth-logged-in" id="mobile-profile-link" style="display: none;">PROFILE</a>
+    <a href="#" class="nav-link auth-logged-in" id="mobile-logout-link" style="display: none;">LOGOUT</a>
+    <a href="login.html" class="nav-link auth-logged-out" id="mobile-login-link">LOGIN</a>
+    <a href="signup.html" class="nav-link auth-logged-out" id="mobile-signup-link">SIGNUP</a>
+    <a href="room-booking.html" class="btn-book-mobile">BOOK NOW</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <video autoplay loop muted playsinline preload="auto" class="hero-bg-video">
+        <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+        <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+
+    <div class="container">
+      <div class="hero-content">
+        <span class="eyebrow eyebrow-light">AURA RESORT</span>
+        <h1 class="hero-title">RELAX, REFRESH &<br>EXPERIENCE COMFORT</h1>
+        <span class="line-decor"></span>
+        <p class="hero-subtitle">Experience unparalleled luxury and comfort at Aura Resort. Your perfect getaway destination.</p>
+        <a href="rooms.html" class="btn btn-gold">EXPLORE ROOMS <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- FLOATING RESERVATION BAR -->
+  <div class="reservation-bar-wrapper">
+    <div class="container">
+      <form class="reservation-bar" id="home-res-bar">
+        <div class="res-field">
+          <span class="res-label">DESTINATION</span>
+          <span class="res-value">AURA RESORT, JAMSHEDPUR</span>
+        </div>
+        <div class="res-field">
+          <label for="home-checkin" class="res-label">CHECK IN</label>
+          <input type="date" id="home-checkin" class="res-input">
+        </div>
+        <div class="res-field">
+          <label for="home-checkout" class="res-label">CHECK OUT</label>
+          <input type="date" id="home-checkout" class="res-input">
+        </div>
+        <div class="res-field">
+          <label for="home-guests" class="res-label">GUESTS</label>
+          <select id="home-guests" class="res-select">
+            <option value="1">1 Adult</option>
+            <option value="2" selected>2 Adults</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4+ Family</option>
+          </select>
+        </div>
+        <div class="res-field">
+          <label for="home-room" class="res-label">ROOMS</label>
+          <select id="home-room" class="res-select">
+            <option value="1" selected>1 Room</option>
+            <option value="2">2 Rooms</option>
+            <option value="3">3 Rooms</option>
+          </select>
+        </div>
+        <div class="res-field border-none">
+          <a href="room-booking.html" class="btn btn-primary res-btn">CHECK AVAILABILITY</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- WELCOME SECTION -->
+  <section class="section bg-ivory">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-content">
+          <span class="eyebrow">WELCOME TO AURA</span>
+          <h2 class="intro-heading">Relax, Refresh and<br>Experience Comfort</h2>
+          <span class="line-decor"></span>
+          <p class="intro-text">Nestled in the heart of nature, Aura Resort offers a perfect blend of luxury, comfort, and tranquility. Whether you're here for a romantic getaway, family vacation, or business retreat, we ensure an unforgettable experience.</p>
+          <a href="about.html" class="btn-link">DISCOVER MORE <span class="arrow">→</span></a>
+        </div>
+        <div class="intro-image-wrap">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=85" alt="Aura Resort Welcome" class="intro-image" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED ROOMS -->
+  <section class="section bg-ivory-soft">
+    <div class="container">
+      <div class="text-center max-w-narrow mb-3">
+        <span class="eyebrow">ACCOMMODATIONS</span>
+        <h2>FEATURED ROOMS</h2>
+        <span class="line-decor line-decor-center"></span>
+        <p class="intro-text">Discover our luxurious rooms designed for your ultimate comfort and relaxation.</p>
+      </div>
+
+      <div class="rooms-list">
+        <!-- Room 1: Deluxe -->
+        <article class="room-panel">
+          <div class="room-panel-image-wrap">
+            <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1200&q=85" alt="Deluxe Room" class="room-panel-img" loading="lazy">
+          </div>
+          <div class="room-panel-content">
+            <h3 class="room-name">DELUXE ROOM</h3>
+            <div class="room-specs">
+              <span>300 SQFT</span>
+              <span>•</span>
+              <span>2 GUESTS</span>
+              <span>•</span>
+              <span>GARDEN VIEW</span>
+            </div>
+            <p class="room-desc">Experience comfort in our Deluxe Room featuring elegant decor, premium amenities, and a serene garden view.</p>
+            <div class="room-price-meta">
+              <div class="room-price">₹3,000 <span>/ NIGHT</span></div>
+              <a href="room-details.html?room=deluxe" class="btn btn-outline">VIEW DETAILS <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Room 2: Premium -->
+        <article class="room-panel">
+          <div class="room-panel-image-wrap">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=85" alt="Premium Room" class="room-panel-img" loading="lazy">
+          </div>
+          <div class="room-panel-content">
+            <h3 class="room-name">PREMIUM ROOM</h3>
+            <div class="room-specs">
+              <span>450 SQFT</span>
+              <span>•</span>
+              <span>2 GUESTS</span>
+              <span>•</span>
+              <span>POOL VIEW</span>
+            </div>
+            <p class="room-desc">Indulge in luxury with our Premium Room featuring spacious interiors, modern amenities, and a stunning pool view.</p>
+            <div class="room-price-meta">
+              <div class="room-price">₹4,500 <span>/ NIGHT</span></div>
+              <a href="room-details.html?room=premium" class="btn btn-outline">VIEW DETAILS <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Room 3: Suite -->
+        <article class="room-panel">
+          <div class="room-panel-image-wrap">
+            <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=1200&q=85" alt="Suite Room" class="room-panel-img" loading="lazy">
+          </div>
+          <div class="room-panel-content">
+            <h3 class="room-name">SUITE ROOM</h3>
+            <div class="room-specs">
+              <span>650 SQFT</span>
+              <span>•</span>
+              <span>4 GUESTS</span>
+              <span>•</span>
+              <span>OCEAN VIEW</span>
+            </div>
+            <p class="room-desc">Experience the epitome of luxury in our Suite Room with a separate living area, premium amenities, and breathtaking ocean views.</p>
+            <div class="room-price-meta">
+              <div class="room-price">₹6,000 <span>/ NIGHT</span></div>
+              <a href="room-details.html?room=suite" class="btn btn-outline">VIEW DETAILS <span class="arrow">→</span></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="rooms.html" class="btn btn-primary">VIEW ALL ROOMS <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- AMENITIES PREVIEW -->
+  <section class="section bg-ivory">
+    <div class="container">
+      <div class="text-center max-w-narrow mb-3">
+        <span class="eyebrow">RESORT AMENITIES</span>
+        <h2>AMENITIES & SERVICES</h2>
+        <span class="line-decor line-decor-center"></span>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-wifi display-4 text-gold"></i>
+            <h4 class="mt-2">Free Wi-Fi</h4>
+            <p class="text-stone">High-speed internet throughout the resort</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-droplet display-4 text-gold"></i>
+            <h4 class="mt-2">Swimming Pool</h4>
+            <p class="text-stone">Luxurious infinity pool with ocean view</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-building display-4 text-gold"></i>
+            <h4 class="mt-2">Spa & Wellness</h4>
+            <p class="text-stone">Rejuvenating spa treatments and wellness programs</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-car-front display-4 text-gold"></i>
+            <h4 class="mt-2">Free Parking</h4>
+            <p class="text-stone">Secure parking for all guests</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-egg-fried display-4 text-gold"></i>
+            <h4 class="mt-2">Fine Dining</h4>
+            <p class="text-stone">Multi-cuisine restaurant with gourmet options</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-people display-4 text-gold"></i>
+            <h4 class="mt-2">Banquet Hall</h4>
+            <p class="text-stone">Elegant spaces for events and celebrations</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-heart-pulse display-4 text-gold"></i>
+            <h4 class="mt-2">Fitness Center</h4>
+            <p class="text-stone">State-of-the-art gym and fitness facilities</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="text-center p-3">
+            <i class="bi bi-clock display-4 text-gold"></i>
+            <h4 class="mt-2">24/7 Service</h4>
+            <p class="text-stone">Round-the-clock room service and support</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="amenities.html" class="btn btn-outline">VIEW ALL AMENITIES <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DINING PREVIEW -->
+  <section class="section bg-ivory-soft">
+    <div class="container">
+      <div class="dining-grid">
+        <div class="dining-img-container">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=85" alt="Aura Fine Dining" class="dining-main-img" loading="lazy">
+        </div>
+        <div class="dining-content">
+          <span class="eyebrow">GASTRONOMY</span>
+          <h2>DINING AT AURA</h2>
+          <span class="line-decor"></span>
+          <p class="intro-text">Savor exquisite culinary experiences at our multi-cuisine restaurant. From authentic local delicacies to international favorites, our chefs create unforgettable dining experiences.</p>
+
+          <div class="dining-venues">
+            <div class="venue-item">
+              <div>
+                <div class="venue-name">THE GRAND DINING</div>
+                <div class="menu-item-desc">Multi-cuisine Fine Dining Restaurant</div>
+              </div>
+              <span class="venue-tag">SIGNATURE</span>
+            </div>
+
+            <div class="venue-item">
+              <div>
+                <div class="venue-name">THE TERRACE CAFE</div>
+                <div class="menu-item-desc">Casual Dining with Outdoor Seating</div>
+              </div>
+              <span class="venue-tag">CASUAL</span>
+            </div>
+
+            <div class="venue-item">
+              <div>
+                <div class="venue-name">THE LOUNGE BAR</div>
+                <div class="menu-item-desc">Premium Bar with Cocktail Specials</div>
+              </div>
+              <span class="venue-tag">BAR</span>
+            </div>
+          </div>
+
+          <a href="dining.html" class="btn btn-primary">EXPLORE DINING <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANQUET PREVIEW -->
+  <section class="section bg-ivory">
+    <div class="container">
+      <div class="text-center max-w-narrow mb-3">
+        <span class="eyebrow">EVENTS & CELEBRATIONS</span>
+        <h2>BANQUET & EVENTS</h2>
+        <span class="line-decor line-decor-center"></span>
+        <p class="intro-text">Host your special occasions at our elegant banquet halls with world-class facilities.</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Wedding Hall">
+            <div class="card-body text-center">
+              <h4>Wedding Hall</h4>
+              <p class="text-stone">Elegant space for 300+ guests with premium decor</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Conference Hall">
+            <div class="card-body text-center">
+              <h4>Conference Hall</h4>
+              <p class="text-stone">Modern facilities for business meetings and conferences</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card border-0 shadow-sm h-100">
+            <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=800&q=85" class="card-img-top" alt="Outdoor Lawn">
+            <div class="card-body text-center">
+              <h4>Outdoor Lawn</h4>
+              <p class="text-stone">Beautiful garden setting for intimate celebrations</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="banquet.html" class="btn btn-primary">EXPLORE BANQUET <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="section bg-ivory-soft">
+    <div class="container">
+      <div class="flex-between-end mb-3">
+        <div>
+          <span class="eyebrow">VISUAL MOMENTS</span>
+          <h2>GALLERY</h2>
+        </div>
+        <a href="gallery.html" class="btn-link">EXPLORE FULL GALLERY <span class="arrow">→</span></a>
+      </div>
+
+      <div class="gallery-masonry">
+        <div class="gallery-item" data-category="architecture">
+          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=85" alt="Resort Architecture" class="gallery-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-caption">Resort Architecture</div>
+            <div class="gallery-cat">ARCHITECTURE</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="rooms">
+          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=85" alt="Luxury Suite" class="gallery-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-caption">Luxury Suite</div>
+            <div class="gallery-cat">ROOMS</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="dining">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=85" alt="Fine Dining" class="gallery-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-caption">Fine Dining Experience</div>
+            <div class="gallery-cat">DINING</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="amenities">
+          <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=85" alt="Spa & Wellness" class="gallery-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-caption">Spa & Wellness Center</div>
+            <div class="gallery-cat">AMENITIES</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="banquet">
+          <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=85" alt="Banquet Hall" class="gallery-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-caption">Grand Banquet Hall</div>
+            <div class="gallery-cat">BANQUET</div>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="nature">
+          <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=85" alt="Resort View" class="gallery-img" loading="lazy">
+          <div class="gallery-item-overlay">
+            <div class="gallery-caption">Scenic Resort View</div>
+            <div class="gallery-cat">NATURE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox-modal" aria-hidden="true" role="dialog">
+    <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+    <button class="lightbox-prev" aria-label="Previous Image">&#10094;</button>
+    <button class="lightbox-next" aria-label="Next Image">&#10095;</button>
+    <div class="lightbox-counter">1 / 6</div>
+    <div class="lightbox-content">
+      <img src="" alt="" class="lightbox-img">
+      <div class="lightbox-caption-bar">
+        <div class="lightbox-caption gallery-caption"></div>
+        <div class="lightbox-category gallery-cat"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING CTA SECTION -->
+  <section class="section bg-charcoal">
+    <div class="container text-center">
+      <span class="eyebrow eyebrow-light">BOOK YOUR STAY</span>
+      <h2 class="text-ivory">Plan Your Perfect Getaway</h2>
+      <span class="line-decor line-decor-center"></span>
+      <p class="text-stone-muted max-w-medium mx-auto">Experience luxury, comfort, and unforgettable memories at Aura Resort. Book now and enjoy exclusive offers.</p>
+      <a href="room-booking.html" class="btn btn-gold mt-3">BOOK NOW <span class="arrow">→</span></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">AURA RESORT</div>
+          <div class="footer-tagline">RELAX · REFRESH · COMFORT</div>
+          <p class="footer-desc">Experience unparalleled luxury and comfort at Aura Resort. Your perfect getaway destination.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+            <a href="#" class="social-link" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-heading">QUICK LINKS</div>
+          <ul class="footer-nav-list">
+            <li><a href="about.html" class="footer-nav-link">About Us</a></li>
+            <li><a href="rooms.html" class="footer-nav-link">Rooms & Suites</a></li>
+            <li><a href="amenities.html" class="footer-nav-link">Amenities</a></li>
+            <li><a href="gallery.html" class="footer-nav-link">Gallery</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">BOOKINGS</div>
+          <ul class="footer-nav-list">
+            <li><a href="room-booking.html" class="footer-nav-link">Room Booking</a></li>
+            <li><a href="restaurant-booking.html" class="footer-nav-link">Restaurant Booking</a></li>
+            <li><a href="banquet-booking.html" class="footer-nav-link">Banquet Booking</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-heading">CONTACT</div>
+          <div class="footer-contact-info">
+            <div class="footer-contact-item">
+              <i class="bi bi-geo-alt"></i>
+              <span>Marine Drive, Circuit House Area, Jamshedpur, Jharkhand</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="bi bi-telephone"></i>
+              <span>+91 800-555-AURA</span>
+            </div>
+            <div class="footer-contact-item">
+              <i class="bi bi-envelope"></i>
+              <span>info@auraresort.com</span>
+            </div>
+          </div>
+          <a href="room-booking.html" class="btn btn-gold w-full">BOOK YOUR STAY <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Aura Resort. All Rights Reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="#" class="footer-bottom-link">Privacy Policy</a>
+          <a href="#" class="footer-bottom-link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/script.js"></script>
+</body>
+</html>
