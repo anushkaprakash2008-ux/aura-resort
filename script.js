@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const rawPath = window.location.pathname;
   const currentPage = rawPath.split('/').pop().split('?')[0].split('#')[0] || 'index.html';
-  const protectedPages = ['profile.html', 'my-bookings.html', 'room-booking.html', 'banquet-booking.html', 'resturant-booking.html', 'payment.html', 'booking-confimation.html'];
+  const protectedPages = ['profile.html', 'my-bookings.html', 'room-booking.html', 'banquet-booking.html', 'resturant-booking.html', 'payment.html', 'booking-confirmation.html'];
   const authPages = ['login.html', 'signup.html'];
 
   // Check 1: Redirect unauthenticated user away from protected pages
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'resturant-booking.html': 'dining.html',
       'banquet-booking.html': 'banquet.html',
       'payment.html': 'rooms.html',
-      'booking-confimation.html': 'rooms.html',
+      'booking-confirmation.html': 'rooms.html',
       'my-bookings.html': 'profile.html'
     };
 
