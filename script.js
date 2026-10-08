@@ -1431,26 +1431,63 @@ document.addEventListener('DOMContentLoaded', function() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(val)) {
           isValid = false;
-          errorMsg = 'Enter a valid email address (e.g. name@example.com).';
+          errorMsg = '⚠️ Enter a valid email address (e.g. name@example.com).';
         }
       } else if (type === 'tel' || id.includes('mobile') || id.includes('phone')) {
         const phoneDigits = val.replace(/\D/g, '');
-        if (phoneDigits.length < 10 || phoneDigits.length > 12) {
+        if (phoneDigits.length !== 10 || !/^[6-9]\d{9}$/.test(phoneDigits)) {
           isValid = false;
-          errorMsg = 'Enter a valid 10-digit mobile number.';
+          errorMsg = '⚠️ Mobile number must be exactly 10 digits (starting with 6, 7, 8, or 9).';
         }
       } else if (id.includes('name') || id.includes('fname') || id.includes('lname')) {
         if (val.length < 2) {
           isValid = false;
-          errorMsg = 'Name must be at least 2 characters.';
+          errorMsg = '⚠️ Name must be at least 2 characters.';
         } else if (!/^[a-zA-Z\s.'-]+$/.test(val)) {
           isValid = false;
-          errorMsg = 'Name should only contain letters and spaces.';
+          errorMsg = '⚠️ Name should only contain letters and spaces.';
         }
       } else if (id.includes('id-number')) {
-        if (val.length < 4) {
+        const form = input.closest('form');
+        const idTypeEl = form ? form.querySelector('#id-type, #rest-id-type, #ban-id-type') : null;
+        const idType = idTypeEl ? idTypeEl.value : '';
+
+        if (!idType) {
           isValid = false;
-          errorMsg = 'ID number must be at least 4 characters.';
+          errorMsg = '⚠️ Please select a Government ID Type first.';
+        } else if (idType === 'Aadhaar Card') {
+          const cleanAadhaar = val.replace(/\s|-/g, '');
+          if (!/^\d{12}$/.test(cleanAadhaar)) {
+            isValid = false;
+            errorMsg = '⚠️ Aadhaar Card number must be exactly 12 numeric digits.';
+          }
+        } else if (idType === 'PAN Card') {
+          const cleanPan = val.trim().toUpperCase();
+          if (!/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(cleanPan)) {
+            isValid = false;
+            errorMsg = '⚠️ PAN Card number must be 10 characters (e.g. ABCDE1234F).';
+          }
+        } else if (idType === 'Passport') {
+          const cleanPass = val.trim().toUpperCase();
+          if (!/^[A-Z][0-9]{7}$/.test(cleanPass)) {
+            isValid = false;
+            errorMsg = '⚠️ Passport number must be 8 characters (1 letter followed by 7 digits).';
+          }
+        } else if (idType === 'Voter ID') {
+          const cleanVoter = val.trim().toUpperCase();
+          if (!/^[A-Z]{3}[0-9]{7}$/.test(cleanVoter)) {
+            isValid = false;
+            errorMsg = '⚠️ Voter ID number must be 10 characters (e.g. ABC1234567).';
+          }
+        } else if (idType === 'Driving Licence') {
+          const cleanDL = val.replace(/\s|-/g, '');
+          if (cleanDL.length < 10 || cleanDL.length > 16) {
+            isValid = false;
+            errorMsg = '⚠️ Driving Licence number must be between 10 and 16 characters.';
+          }
+        } else if (val.length < 5 || val.length > 20) {
+          isValid = false;
+          errorMsg = '⚠️ ID Number must be between 5 and 20 characters.';
         }
       } else if (id === 'check-out' || id === 'check-in') {
         const checkinVal = document.getElementById('check-in')?.value;
@@ -1460,7 +1497,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const dOut = new Date(checkoutVal);
           if (dOut <= dIn) {
             isValid = false;
-            errorMsg = 'Check-out date must be after Check-in date.';
+            errorMsg = '⚠️ Check-out date must be after Check-in date.';
           }
         }
       }
@@ -1489,6 +1526,16 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('input', function() { validateSingleInput(input); });
         input.addEventListener('blur', function() { validateSingleInput(input); });
       });
+
+      const idTypeEl = form.querySelector('#id-type, #rest-id-type, #ban-id-type');
+      if (idTypeEl) {
+        idTypeEl.addEventListener('change', function() {
+          const idNumInput = form.querySelector('#id-number, #rest-id-number, #ban-id-number');
+          if (idNumInput && idNumInput.value) {
+            validateSingleInput(idNumInput);
+          }
+        });
+      }
 
       form.addEventListener('submit', function(e) {
         let isFormValid = true;
