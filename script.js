@@ -1292,6 +1292,112 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ==========================================
+  // REAL-TIME FORM FIELD VALIDATION
+  // ==========================================
+
+  function validateSingleInput(input) {
+    if (!input || input.type === 'hidden' || input.type === 'submit' || input.type === 'checkbox' || input.type === 'radio') return true;
+
+    const val = input.value.trim();
+    const id = input.id || '';
+    const type = input.type || '';
+    let isValid = true;
+    let errorMsg = '';
+
+    let errorEl = input.parentNode.querySelector('.field-error-msg');
+    if (!errorEl) {
+      errorEl = document.createElement('div');
+      errorEl.className = 'field-error-msg';
+      input.parentNode.appendChild(errorEl);
+    }
+
+    if (input.hasAttribute('required') && val === '') {
+      isValid = false;
+      errorMsg = 'This field is required.';
+    } else if (val !== '') {
+      if (type === 'email' || id.includes('email')) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(val)) {
+          isValid = false;
+          errorMsg = 'Enter a valid email address (e.g. name@example.com).';
+        }
+      } else if (type === 'tel' || id.includes('mobile') || id.includes('phone')) {
+        const phoneDigits = val.replace(/\D/g, '');
+        if (phoneDigits.length < 10 || phoneDigits.length > 12) {
+          isValid = false;
+          errorMsg = 'Enter a valid 10-digit mobile number.';
+        }
+      } else if (id.includes('name') || id.includes('fname') || id.includes('lname')) {
+        if (val.length < 2) {
+          isValid = false;
+          errorMsg = 'Name must be at least 2 characters.';
+        } else if (!/^[a-zA-Z\s.'-]+$/.test(val)) {
+          isValid = false;
+          errorMsg = 'Name should only contain letters and spaces.';
+        }
+      } else if (id.includes('id-number')) {
+        if (val.length < 4) {
+          isValid = false;
+          errorMsg = 'ID number must be at least 4 characters.';
+        }
+      } else if (id === 'check-out' || id === 'check-in') {
+        const checkinVal = document.getElementById('check-in')?.value;
+        const checkoutVal = document.getElementById('check-out')?.value;
+        if (checkinVal && checkoutVal) {
+          const dIn = new Date(checkinVal);
+          const dOut = new Date(checkoutVal);
+          if (dOut <= dIn) {
+            isValid = false;
+            errorMsg = 'Check-out date must be after Check-in date.';
+          }
+        }
+      }
+    }
+
+    if (isValid) {
+      input.classList.remove('is-invalid');
+      if (val !== '') input.classList.add('is-valid');
+      else input.classList.remove('is-valid');
+      errorEl.classList.remove('visible');
+    } else {
+      input.classList.remove('is-valid');
+      input.classList.add('is-invalid');
+      errorEl.textContent = errorMsg;
+      errorEl.classList.add('visible');
+    }
+
+    return isValid;
+  }
+
+  function setupRealtimeValidation() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(function(form) {
+      const inputs = form.querySelectorAll('input, select, textarea');
+      inputs.forEach(function(input) {
+        input.addEventListener('input', function() { validateSingleInput(input); });
+        input.addEventListener('blur', function() { validateSingleInput(input); });
+      });
+
+      form.addEventListener('submit', function(e) {
+        let isFormValid = true;
+        inputs.forEach(function(input) {
+          if (!validateSingleInput(input)) {
+            isFormValid = false;
+          }
+        });
+        if (!isFormValid) {
+          e.preventDefault();
+          e.stopPropagation();
+          const firstInvalid = form.querySelector('.is-invalid');
+          if (firstInvalid) firstInvalid.focus();
+        }
+      }, true);
+    });
+  }
+
+  setupRealtimeValidation();
+
+  // ==========================================
   // GLOBAL BOOK NOW SELECTION MODAL
   // ==========================================
 
