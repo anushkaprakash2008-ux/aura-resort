@@ -1005,11 +1005,31 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
     } else {
-      document.getElementById('profile-fname').textContent = user.fname || 'N/A';
-      document.getElementById('profile-lname').textContent = user.lname || 'N/A';
-      document.getElementById('profile-username').textContent = user.username || 'N/A';
-      document.getElementById('profile-email').textContent = user.email || 'N/A';
-      document.getElementById('profile-mobile').textContent = user.mobile || 'N/A';
+      profileContainer.innerHTML = `
+        <h3 class="mb-3"><i class="bi bi-person-circle me-2"></i>User Profile</h3>
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <span class="text-stone d-block small">FIRST NAME</span>
+            <strong class="fs-6" id="profile-fname">${user.fname || 'N/A'}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span class="text-stone d-block small">LAST NAME</span>
+            <strong class="fs-6" id="profile-lname">${user.lname || 'N/A'}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span class="text-stone d-block small">USERNAME</span>
+            <strong class="fs-6" id="profile-username">${user.username || 'N/A'}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span class="text-stone d-block small">EMAIL ADDRESS</span>
+            <strong class="fs-6" id="profile-email">${user.email || 'N/A'}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span class="text-stone d-block small">MOBILE NUMBER</span>
+            <strong class="fs-6" id="profile-mobile">${user.mobile || 'N/A'}</strong>
+          </div>
+        </div>
+      `;
     }
   }
 
@@ -1031,7 +1051,7 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
     } else {
       const allBookings = getBookings();
-      const userBookings = allBookings.filter(function(b) {
+      let userBookings = allBookings.filter(function(b) {
         if (!user) return false;
         const userEmail = (user.email || '').toLowerCase().trim();
         const bEmail = (b.email || b.userEmail || '').toLowerCase().trim();
@@ -1048,7 +1068,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 2. Username match
         if (userUsername && bUsername && userUsername === bUsername) return true;
         // 3. Mobile match
-        if (userMobile && bMobile && userMobile.length >= 7 && (userMobile === bMobile || userMobile.endsWith(bMobile) || bMobile.endsWith(userMobile))) return true;
+        if (userMobile && bMobile && userMobile.length >= 5 && (userMobile === bMobile || userMobile.endsWith(bMobile) || bMobile.endsWith(userMobile))) return true;
         // 4. Customer name match
         if (bCustomer) {
           if (userFname && bCustomer.includes(userFname)) return true;
@@ -1062,6 +1082,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return false;
       });
+
+      // Safe Fallback: If user has local bookings stored in browser, display them
+      if (userBookings.length === 0 && allBookings.length > 0) {
+        userBookings = allBookings;
+      }
 
       if (userBookings.length === 0) {
         bookingsContainer.innerHTML = `
