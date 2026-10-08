@@ -2691,3 +2691,26 @@ body.logged-in li:has(#signup-link) {
     transform: none !important;
   }
 }
+
+/* ==========================================
+   BOOKING TYPE SELECTION MODAL STYLES
+   ========================================== */
+.booking-select-card {
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.booking-select-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(212, 175, 55, 0.5) !important;
+}
+
+.booking-select-card .icon-circle {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.booking-select-card:hover .icon-circle {
+  transform: scale(1.1) !important;
+  background-color: var(--color-gold) !important;
+  color: #ffffff !important;
+}

@@ -1291,5 +1291,85 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // ==========================================
+  // GLOBAL BOOK NOW SELECTION MODAL
+  // ==========================================
+
+  function setupBookNowModal() {
+    if (!document.getElementById('bookingTypeModal')) {
+      const modalHTML = `
+        <div class="modal fade" id="bookingTypeModal" tabindex="-1" aria-labelledby="bookingTypeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; overflow: hidden;">
+              <div class="modal-header p-4" style="background: linear-gradient(135deg, #111111 0%, #1e1e1e 100%); color: #d4af37;">
+                <div>
+                  <span class="eyebrow eyebrow-light d-block text-gold mb-1" style="letter-spacing: 2px; font-size: 0.75rem;">AURA RESORT RESERVATIONS</span>
+                  <h4 class="modal-title font-heading mb-0 text-white" id="bookingTypeModalLabel" style="font-family: 'Cinzel', serif; letter-spacing: 1px;">SELECT RESERVATION TYPE</h4>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body p-4 p-md-5" style="background-color: #fdfcf7;">
+                <p class="text-muted mb-4 text-center" style="font-size: 0.95rem;">Please select the type of reservation you would like to make:</p>
+                <div class="row g-4">
+                  <!-- Room Booking Card -->
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 text-center booking-select-card" style="border-radius: 12px; background: #fff; transition: all 0.3s ease;">
+                      <div class="icon-circle mb-3 mx-auto d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); color: #d4af37; font-size: 1.6rem;">
+                        <i class="bi bi-door-open"></i>
+                      </div>
+                      <h5 class="fw-bold mb-2" style="font-family: 'Cinzel', serif;">Room Booking</h5>
+                      <p class="text-muted small flex-grow-1 mb-3">Luxurious rooms and suites with world-class amenities & views.</p>
+                      <a href="room-booking.html" class="btn btn-primary btn-sm w-full py-2">BOOK ROOM <span class="arrow">→</span></a>
+                    </div>
+                  </div>
+                  <!-- Restaurant Booking Card -->
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 text-center booking-select-card" style="border-radius: 12px; background: #fff; transition: all 0.3s ease;">
+                      <div class="icon-circle mb-3 mx-auto d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); color: #d4af37; font-size: 1.6rem;">
+                        <i class="bi bi-cup-hot"></i>
+                      </div>
+                      <h5 class="fw-bold mb-2" style="font-family: 'Cinzel', serif;">Restaurant</h5>
+                      <p class="text-muted small flex-grow-1 mb-3">Reserve a table for fine dining and gourmet culinary experiences.</p>
+                      <a href="resturant-booking.html" class="btn btn-primary btn-sm w-full py-2">BOOK TABLE <span class="arrow">→</span></a>
+                    </div>
+                  </div>
+                  <!-- Banquet Booking Card -->
+                  <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 text-center booking-select-card" style="border-radius: 12px; background: #fff; transition: all 0.3s ease;">
+                      <div class="icon-circle mb-3 mx-auto d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 50%; background: rgba(212, 175, 55, 0.1); color: #d4af37; font-size: 1.6rem;">
+                        <i class="bi bi-building"></i>
+                      </div>
+                      <h5 class="fw-bold mb-2" style="font-family: 'Cinzel', serif;">Banquet Hall</h5>
+                      <p class="text-muted small flex-grow-1 mb-3">Host weddings, conferences, anniversaries & corporate events.</p>
+                      <a href="banquet-booking.html" class="btn btn-primary btn-sm w-full py-2">BOOK EVENT <span class="arrow">→</span></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', modalHTML);
+    }
+
+    const bookNowButtons = document.querySelectorAll('.btn-book, .btn-book-mobile, .site-footer .btn-gold, a[href="room-booking.html"].btn-gold');
+    bookNowButtons.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        if (btn.closest('#bookingTypeModal')) return;
+        e.preventDefault();
+        const modalEl = document.getElementById('bookingTypeModal');
+        if (modalEl && typeof bootstrap !== 'undefined') {
+          const bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+          bsModal.show();
+        } else {
+          window.location.href = 'room-booking.html';
+        }
+      });
+    });
+  }
+
+  setupBookNowModal();
+
   console.log('Aura Resort System Initialized.');
 });
