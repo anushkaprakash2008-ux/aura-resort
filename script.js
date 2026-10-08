@@ -280,6 +280,108 @@ document.addEventListener('DOMContentLoaded', function() {
     return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
   }
 
+  // ==========================================
+  // REVIEW BOOKING DETAILS MODAL
+  // ==========================================
+  function showBookingReviewModal(booking, onConfirm) {
+    const existingModal = document.getElementById('reviewBookingModal');
+    if (existingModal) existingModal.remove();
+
+    let detailsRows = '';
+    if (booking.type === 'Room Booking') {
+      detailsRows = `
+        <tr><td style="width:40%;"><strong>Room Type:</strong></td><td>${booking.roomType}</td></tr>
+        <tr><td><strong>Check-In Date:</strong></td><td>${formatDate(booking.checkin)}</td></tr>
+        <tr><td><strong>Check-Out Date:</strong></td><td>${formatDate(booking.checkout)}</td></tr>
+        <tr><td><strong>Duration & Rooms:</strong></td><td>${booking.nights} Night(s), ${booking.rooms} Room(s)</td></tr>
+        <tr><td><strong>Guests:</strong></td><td>${booking.guests} Guest(s)</td></tr>
+      `;
+    } else if (booking.type === 'Restaurant Booking') {
+      detailsRows = `
+        <tr><td style="width:40%;"><strong>Reservation Date:</strong></td><td>${formatDate(booking.date)}</td></tr>
+        <tr><td><strong>Time Slot:</strong></td><td>${booking.time}</td></tr>
+        <tr><td><strong>Guests:</strong></td><td>${booking.guests} Guest(s)</td></tr>
+        <tr><td><strong>Special Request:</strong></td><td>${booking.specialRequest || 'None'}</td></tr>
+      `;
+    } else if (booking.type === 'Banquet Booking') {
+      detailsRows = `
+        <tr><td style="width:40%;"><strong>Event Type:</strong></td><td>${booking.eventType}</td></tr>
+        <tr><td><strong>Event Date:</strong></td><td>${formatDate(booking.eventDate)}</td></tr>
+        <tr><td><strong>Hall Selection:</strong></td><td>${booking.hallType}</td></tr>
+        <tr><td><strong>Guests:</strong></td><td>${booking.guests} Guest(s)</td></tr>
+        <tr><td><strong>Timing:</strong></td><td>${booking.startTime} to ${booking.endTime}</td></tr>
+        <tr><td><strong>Catering & Decor:</strong></td><td>Catering: ${booking.catering}, Decor: ${booking.decoration}</td></tr>
+      `;
+    }
+
+    const modalHTML = `
+      <div class="modal fade" id="reviewBookingModal" tabindex="-1" aria-labelledby="reviewBookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content border-0 shadow-lg" style="border-radius: 16px; overflow: hidden;">
+            <div class="modal-header p-4" style="background: linear-gradient(135deg, #111111 0%, #1e1e1e 100%); color: #d4af37;">
+              <div>
+                <span class="eyebrow eyebrow-light d-block text-gold mb-1" style="letter-spacing: 2px; font-size: 0.75rem;">PLEASE VERIFY YOUR INFORMATION</span>
+                <h4 class="modal-title font-heading mb-0 text-white" id="reviewBookingModalLabel" style="font-family: 'Cinzel', serif;">REVIEW BOOKING DETAILS</h4>
+              </div>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 p-md-5" style="background-color: #fdfcf7;">
+              <div class="alert border-0 shadow-sm mb-4" style="background-color: rgba(212, 175, 55, 0.12); color: #554209;">
+                <i class="bi bi-shield-check me-2 fs-5"></i> Please double-check your booking details below before proceeding to confirmation/payment.
+              </div>
+
+              <div class="card border-0 shadow-sm p-3 mb-4 bg-white" style="border-radius: 12px;">
+                <h6 class="fw-bold text-gold-dark mb-3" style="font-family: 'Cinzel', serif;"><i class="bi bi-person-vcard me-2"></i>Personal Information</h6>
+                <table class="table table-borderless table-sm mb-0">
+                  <tbody>
+                    <tr><td style="width:40%;"><strong>Full Name:</strong></td><td>${booking.customer}</td></tr>
+                    <tr><td><strong>Email Address:</strong></td><td>${booking.email}</td></tr>
+                    <tr><td><strong>Mobile Number:</strong></td><td>${booking.mobile}</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card border-0 shadow-sm p-3 mb-4 bg-white" style="border-radius: 12px;">
+                <h6 class="fw-bold text-gold-dark mb-3" style="font-family: 'Cinzel', serif;"><i class="bi bi-calendar-event me-2"></i>${booking.type} Summary</h6>
+                <table class="table table-borderless table-sm mb-0">
+                  <tbody>
+                    ${detailsRows}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card border-0 shadow-sm p-3 bg-white d-flex flex-row justify-content-between align-items-center" style="border-radius: 12px;">
+                <div>
+                  <span class="text-muted d-block small">TOTAL AMOUNT</span>
+                  <span class="fs-4 fw-bold text-gold-dark">₹${booking.amount ? booking.amount.toLocaleString() : '0'}</span>
+                </div>
+                <div>
+                  <span class="badge bg-warning text-dark px-3 py-2 fs-6">Pending Payment</span>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer bg-light p-3 d-flex justify-content-between">
+              <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">✏️ Edit Details</button>
+              <button type="button" class="btn btn-primary px-4" id="confirmReviewProceedBtn">CONFIRM & PROCEED →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    const modalEl = document.getElementById('reviewBookingModal');
+    const bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    bsModal.show();
+
+    document.getElementById('confirmReviewProceedBtn').addEventListener('click', function() {
+      bsModal.hide();
+      if (typeof onConfirm === 'function') {
+        onConfirm();
+      }
+    });
+  }
+
   function getLocalDateString(d = new Date()) {
     const year = d.getFullYear();
     const month = String(d.getMonth() + 1).padStart(2, '0');
@@ -610,15 +712,17 @@ document.addEventListener('DOMContentLoaded', function() {
         date: new Date().toISOString()
       };
 
-      const bookings = getBookings();
-      bookings.push(booking);
-      saveBookings(bookings);
+      showBookingReviewModal(booking, function() {
+        const bookings = getBookings();
+        bookings.push(booking);
+        saveBookings(bookings);
 
-      localStorage.setItem('aura_current_booking', JSON.stringify(booking));
+        localStorage.setItem('aura_current_booking', JSON.stringify(booking));
 
-      feedback.textContent = 'Booking successful! Redirecting to payment...';
-      feedback.className = 'form-feedback success';
-      setTimeout(function() { window.location.href = 'payment.html'; }, 1000);
+        feedback.textContent = 'Booking confirmed! Redirecting to payment...';
+        feedback.className = 'form-feedback success';
+        setTimeout(function() { window.location.href = 'payment.html'; }, 800);
+      });
     });
   }
 
@@ -739,15 +843,17 @@ document.addEventListener('DOMContentLoaded', function() {
         bookingDate: new Date().toISOString()
       };
 
-      const bookings = getBookings();
-      bookings.push(booking);
-      saveBookings(bookings);
+      showBookingReviewModal(booking, function() {
+        const bookings = getBookings();
+        bookings.push(booking);
+        saveBookings(bookings);
 
-      localStorage.setItem('aura_current_booking', JSON.stringify(booking));
+        localStorage.setItem('aura_current_booking', JSON.stringify(booking));
 
-      feedback.textContent = 'Restaurant booking confirmed! Redirecting to confirmation...';
-      feedback.className = 'form-feedback success';
-      setTimeout(function() { window.location.href = 'booking-confirmation.html'; }, 1000);
+        feedback.textContent = 'Restaurant booking confirmed! Redirecting to confirmation...';
+        feedback.className = 'form-feedback success';
+        setTimeout(function() { window.location.href = 'booking-confirmation.html'; }, 800);
+      });
     });
   }
 
@@ -866,15 +972,17 @@ document.addEventListener('DOMContentLoaded', function() {
         bookingDate: new Date().toISOString()
       };
 
-      const bookings = getBookings();
-      bookings.push(booking);
-      saveBookings(bookings);
+      showBookingReviewModal(booking, function() {
+        const bookings = getBookings();
+        bookings.push(booking);
+        saveBookings(bookings);
 
-      localStorage.setItem('aura_current_booking', JSON.stringify(booking));
+        localStorage.setItem('aura_current_booking', JSON.stringify(booking));
 
-      feedback.textContent = 'Banquet booking confirmed! Redirecting to payment...';
-      feedback.className = 'form-feedback success';
-      setTimeout(function() { window.location.href = 'payment.html'; }, 1000);
+        feedback.textContent = 'Banquet booking confirmed! Redirecting to payment...';
+        feedback.className = 'form-feedback success';
+        setTimeout(function() { window.location.href = 'payment.html'; }, 800);
+      });
     });
   }
 
