@@ -491,6 +491,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (roomSelect) roomSelect.addEventListener('change', calculateTotal);
     if (roomsInput) roomsInput.addEventListener('change', calculateTotal);
 
+    // Auto-fill logged in user info
+    const loggedUser = getCurrentUser();
+    if (loggedUser) {
+      const nameEl = document.getElementById('full-name');
+      const emailEl = document.getElementById('email');
+      const mobileEl = document.getElementById('mobile');
+      if (nameEl && !nameEl.value) nameEl.value = (loggedUser.fname + (loggedUser.lname ? ' ' + loggedUser.lname : '')).trim();
+      if (emailEl && !emailEl.value) emailEl.value = loggedUser.email || '';
+      if (mobileEl && !mobileEl.value) mobileEl.value = loggedUser.mobile || '';
+    }
+
     // Read URL query parameters if passed from index.html reservation bar
     const urlParams = new URLSearchParams(window.location.search);
     const qIn = urlParams.get('checkin');
@@ -578,11 +589,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const roomPrice = roomPrices[roomType] || 3000;
       const total = roomPrice * parseInt(numRooms) * nights;
 
+      const currentUser = getCurrentUser();
       const booking = {
         id: generateBookingId(),
         type: 'Room Booking',
         customer: fname,
         email: email,
+        userEmail: currentUser ? currentUser.email : email,
+        username: currentUser ? currentUser.username : '',
         mobile: mobile,
         roomType: roomType.charAt(0).toUpperCase() + roomType.slice(1),
         checkin: checkin,
@@ -706,11 +720,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
 
+      const currentUser = getCurrentUser();
       const booking = {
         id: generateBookingId(),
         type: 'Restaurant Booking',
         customer: fname,
         email: email,
+        userEmail: currentUser ? currentUser.email : email,
+        username: currentUser ? currentUser.username : '',
         mobile: mobile,
         date: date,
         time: time,
@@ -825,11 +842,14 @@ document.addEventListener('DOMContentLoaded', function() {
       };
       const basePrice = hallPrices[hallType] || 25000;
 
+      const currentUser = getCurrentUser();
       const booking = {
         id: generateBookingId(),
         type: 'Banquet Booking',
         customer: fname,
         email: email,
+        userEmail: currentUser ? currentUser.email : email,
+        username: currentUser ? currentUser.username : '',
         mobile: mobile,
         eventType: eventType,
         eventDate: eventDate,
@@ -1011,7 +1031,37 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
     } else {
       const allBookings = getBookings();
-      const userBookings = allBookings.filter(b => b.email === user.email || b.customer === user.fname || b.customer === (user.fname + ' ' + user.lname));
+      const userBookings = allBookings.filter(function(b) {
+        if (!user) return false;
+        const userEmail = (user.email || '').toLowerCase().trim();
+        const bEmail = (b.email || b.userEmail || '').toLowerCase().trim();
+        const userUsername = (user.username || '').toLowerCase().trim();
+        const bUsername = (b.username || '').toLowerCase().trim();
+        const userMobile = (user.mobile || '').replace(/\D/g, '');
+        const bMobile = (b.mobile || '').replace(/\D/g, '');
+        const userFname = (user.fname || '').toLowerCase().trim();
+        const userLname = (user.lname || '').toLowerCase().trim();
+        const bCustomer = (b.customer || '').toLowerCase().trim();
+
+        // 1. Email match (case-insensitive)
+        if (userEmail && bEmail && (userEmail === bEmail || bEmail.includes(userEmail) || userEmail.includes(bEmail))) return true;
+        // 2. Username match
+        if (userUsername && bUsername && userUsername === bUsername) return true;
+        // 3. Mobile match
+        if (userMobile && bMobile && userMobile.length >= 7 && (userMobile === bMobile || userMobile.endsWith(bMobile) || bMobile.endsWith(userMobile))) return true;
+        // 4. Customer name match
+        if (bCustomer) {
+          if (userFname && bCustomer.includes(userFname)) return true;
+          if (userLname && bCustomer.includes(userLname)) return true;
+          if (userUsername && bCustomer.includes(userUsername)) return true;
+        }
+
+        // 5. Fallback: if booking was created in the current session
+        const currentBooking = JSON.parse(localStorage.getItem('aura_current_booking')) || {};
+        if (currentBooking.id && currentBooking.id === b.id) return true;
+
+        return false;
+      });
 
       if (userBookings.length === 0) {
         bookingsContainer.innerHTML = `
