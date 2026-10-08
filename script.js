@@ -476,9 +476,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const confirmPass = document.getElementById('signup-confirm-password').value;
       const feedback = document.getElementById('signup-feedback');
 
-      if (!fname || !lname || !username || !email || !mobile || !password || !confirmPass) {
-        feedback.textContent = 'Please complete all required fields.';
+      if (!validateForm(signupForm)) {
+        feedback.textContent = '❌ Please correct the errors in the highlighted fields above before proceeding.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -643,9 +644,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const numRooms = document.getElementById('num-rooms').value;
       const feedback = document.getElementById('booking-feedback');
 
-      if (!fname || !email || !mobile || !idNumber || !checkin || !checkout) {
-        feedback.textContent = 'Please complete all required fields.';
+      if (!validateForm(roomBookingForm)) {
+        feedback.textContent = '❌ Please correct the errors in the highlighted fields above before proceeding.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -799,9 +801,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const request = document.getElementById('rest-request').value.trim();
       const feedback = document.getElementById('rest-feedback');
 
-      if (!fname || !email || !mobile || !idNumber || !date || !time) {
-        feedback.textContent = 'Please complete all required fields.';
+      if (!validateForm(restaurantForm)) {
+        feedback.textContent = '❌ Please correct the errors in the highlighted fields above before proceeding.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -910,9 +913,10 @@ document.addEventListener('DOMContentLoaded', function() {
       const requirements = document.getElementById('special-requirements').value.trim();
       const feedback = document.getElementById('ban-feedback');
 
-      if (!fname || !email || !mobile || !idNumber || !eventDate || !startTime || !endTime) {
-        feedback.textContent = 'Please complete all required fields.';
+      if (!validateForm(banquetForm)) {
+        feedback.textContent = '❌ Please correct the errors in the highlighted fields above before proceeding.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
