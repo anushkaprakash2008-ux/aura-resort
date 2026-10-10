@@ -2947,3 +2947,369 @@ body.logged-in li:has(#signup-link) {
   font-weight: 600 !important;
   font-size: 0.92rem !important;
 }
+
+/* ==========================================
+   ABOUT PAGE ENHANCEMENTS
+   ========================================== */
+
+/* --- STATS COUNTER STRIP --- */
+.about-stats-strip {
+  background: linear-gradient(135deg, #111315 0%, #1a1c1e 100%);
+  border-top: 1px solid rgba(197, 168, 128, 0.3);
+  border-bottom: 1px solid rgba(197, 168, 128, 0.3);
+  padding: 3.5rem 0;
+  position: relative;
+  z-index: 5;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+
+.about-stat-item {
+  position: relative;
+  padding: 0 1rem;
+}
+
+.about-stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: rgba(197, 168, 128, 0.25);
+}
+
+.about-stat-num {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.about-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(250, 248, 245, 0.8);
+}
+
+/* --- STORY SPLIT SECTION --- */
+.about-story-split {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+  margin: 4.5rem 0;
+}
+
+.about-story-img-wrap {
+  position: relative;
+}
+
+.about-story-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: var(--shadow-elevated);
+}
+
+.about-story-quote-card {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--color-charcoal);
+  color: var(--color-ivory);
+  padding: 1.8rem 2rem;
+  max-width: 320px;
+  border-left: 3px solid var(--color-gold);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+}
+
+.about-story-quote-card p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #dfcaa7;
+  margin-bottom: 0.5rem;
+}
+
+.about-story-quote-author {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-stone-muted);
+}
+
+/* --- PILLARS GRID (4 ITEMS) --- */
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3.5rem;
+}
+
+.about-pillar-card {
+  background: var(--color-ivory-soft);
+  border: 1px solid var(--color-sand);
+  padding: 2.5rem 2rem;
+  border-radius: 4px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+
+.about-pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-gold);
+}
+
+.about-pillar-card:hover::before {
+  transform: scaleX(1);
+}
+
+.about-pillar-icon {
+  font-size: 2.4rem;
+  color: var(--color-gold-dark);
+  margin-bottom: 1.2rem;
+  display: inline-block;
+}
+
+.about-pillar-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  margin-bottom: 0.8rem;
+  color: var(--color-text-dark);
+}
+
+.about-pillar-desc {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--color-text-body);
+}
+
+/* --- LEADERSHIP TEAM --- */
+.about-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+}
+
+.about-team-card {
+  background: #ffffff;
+  border: 1px solid var(--color-sand);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s ease;
+}
+
+.about-team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+  border-color: var(--color-gold);
+}
+
+.about-team-img-wrap {
+  height: 320px;
+  overflow: hidden;
+  position: relative;
+}
+
+.about-team-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-team-card:hover .about-team-img {
+  transform: scale(1.06);
+}
+
+.about-team-content {
+  padding: 1.8rem;
+  text-align: center;
+}
+
+.about-team-name {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--color-text-dark);
+  margin-bottom: 0.25rem;
+}
+
+.about-team-role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: 0.9rem;
+  display: block;
+}
+
+.about-team-bio {
+  font-size: 0.85rem;
+  color: var(--color-stone);
+  line-height: 1.6;
+}
+
+/* --- AWARDS GRID --- */
+.about-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.8rem;
+  margin-top: 3rem;
+}
+
+.about-award-badge {
+  background: rgba(212, 175, 55, 0.06);
+  border: 1px solid rgba(197, 168, 128, 0.35);
+  border-radius: 6px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.about-award-badge:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--color-gold);
+  transform: translateY(-4px);
+}
+
+.about-award-icon {
+  font-size: 2.5rem;
+  color: var(--color-gold);
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.about-award-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 0.35rem;
+}
+
+.about-award-year {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--color-gold-dark);
+  font-weight: 700;
+}
+
+/* --- IMMERSIVE CTA BANNER --- */
+.about-cta-banner {
+  background: linear-gradient(rgba(15, 17, 18, 0.82), rgba(15, 17, 18, 0.82)), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1900&q=85') center/cover fixed;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+  margin-top: 5rem;
+}
+
+.about-cta-content {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.about-cta-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: #dfcaa7;
+  margin-bottom: 1rem;
+}
+
+.about-cta-text {
+  font-size: 1rem;
+  color: rgba(250, 248, 245, 0.85);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.about-cta-actions {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- RESPONSIVE ADJUSTMENTS --- */
+@media (max-width: 992px) {
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+  .about-stat-item:nth-child(2)::after {
+    display: none;
+  }
+  .about-story-split {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .about-story-quote-card {
+    position: static;
+    margin-top: 1.5rem;
+    max-width: 100%;
+  }
+  .about-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .about-team-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .about-awards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-stat-item::after {
+    display: none !important;
+  }
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-awards-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-cta-title {
+    font-size: 2rem;
+  }
+}
