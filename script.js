@@ -251,7 +251,16 @@ document.addEventListener('DOMContentLoaded', function() {
       const href = link.getAttribute('href');
       if (!href) return;
       const linkPage = href.split('/').pop().split('?')[0].split('#')[0];
-      if (linkPage === pageName || (pageName === '' && linkPage === 'index.html')) {
+      
+      if (pageName === 'login.html') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeTab = urlParams.get('tab') || urlParams.get('mode') || (window.location.hash === '#signup' ? 'signup' : 'login');
+        if (activeTab === 'signup' && (link.id === 'signup-link' || link.id === 'mobile-signup-link')) {
+          link.classList.add('active');
+        } else if (activeTab !== 'signup' && (link.id === 'login-link' || link.id === 'mobile-login-link')) {
+          link.classList.add('active');
+        }
+      } else if (linkPage === pageName || (pageName === '' && linkPage === 'index.html')) {
         link.classList.add('active');
       }
     });
@@ -460,6 +469,157 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ==========================================
+  // UNIFIED AUTHENTICATION (LOGIN & SIGNUP TABS)
+  // ==========================================
+
+  function validateForm(form) {
+    if (!form) return true;
+    let isFormValid = true;
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(function(input) {
+      if (typeof validateSingleInput === 'function') {
+        if (!validateSingleInput(input)) {
+          isFormValid = false;
+        }
+      } else if (input.hasAttribute('required') && !input.value.trim()) {
+        isFormValid = false;
+      }
+    });
+    return isFormValid;
+  }
+
+  function switchAuthTab(tabName) {
+    const loginTabBtn = document.getElementById('tab-btn-login');
+    const signupTabBtn = document.getElementById('tab-btn-signup');
+    const loginPane = document.getElementById('auth-pane-login');
+    const signupPane = document.getElementById('auth-pane-signup');
+
+    if (!loginPane || !signupPane) return;
+
+    // Reset error styling when switching
+    document.querySelectorAll('.field-error-msg').forEach(function(el) { el.classList.remove('visible'); });
+    document.querySelectorAll('.is-invalid').forEach(function(el) { el.classList.remove('is-invalid'); });
+
+    if (tabName === 'signup') {
+      loginTabBtn?.classList.remove('active');
+      loginTabBtn?.setAttribute('aria-selected', 'false');
+      signupTabBtn?.classList.add('active');
+      signupTabBtn?.setAttribute('aria-selected', 'true');
+
+      loginPane.classList.remove('active');
+      signupPane.classList.add('active');
+
+      document.title = 'Create Account — Aura Resort';
+
+      document.querySelectorAll('#login-link, #mobile-login-link').forEach(function(l) { l.classList.remove('active'); });
+      document.querySelectorAll('#signup-link, #mobile-signup-link').forEach(function(l) { l.classList.add('active'); });
+
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', 'login.html?tab=signup');
+      }
+    } else {
+      signupTabBtn?.classList.remove('active');
+      signupTabBtn?.setAttribute('aria-selected', 'false');
+      loginTabBtn?.classList.add('active');
+      loginTabBtn?.setAttribute('aria-selected', 'true');
+
+      signupPane.classList.remove('active');
+      loginPane.classList.add('active');
+
+      document.title = 'Login & Sign Up — Aura Resort';
+
+      document.querySelectorAll('#signup-link, #mobile-signup-link').forEach(function(l) { l.classList.remove('active'); });
+      document.querySelectorAll('#login-link, #mobile-login-link').forEach(function(l) { l.classList.add('active'); });
+
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', 'login.html?tab=login');
+      }
+    }
+  }
+
+  function initUnifiedAuth() {
+    const loginTabBtn = document.getElementById('tab-btn-login');
+    const signupTabBtn = document.getElementById('tab-btn-signup');
+
+    if (loginTabBtn && signupTabBtn) {
+      loginTabBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchAuthTab('login');
+      });
+
+      signupTabBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        switchAuthTab('signup');
+      });
+
+      // Bottom link switchers
+      document.querySelectorAll('.auth-switch-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = this.getAttribute('data-switch-to');
+          switchAuthTab(target);
+        });
+      });
+
+      // Parse initial tab from URL params or hash
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get('tab') || urlParams.get('mode');
+      const hash = window.location.hash.toLowerCase();
+
+      if (tabParam === 'signup' || hash === '#signup') {
+        switchAuthTab('signup');
+      } else {
+        switchAuthTab('login');
+      }
+
+      // Intercept clicks on login/signup navbar buttons while on login.html to switch tabs smoothly
+      document.querySelectorAll('#login-link, #mobile-login-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          if (currentPage === 'login.html') {
+            e.preventDefault();
+            switchAuthTab('login');
+          }
+        });
+      });
+
+      document.querySelectorAll('#signup-link, #mobile-signup-link').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          if (currentPage === 'login.html') {
+            e.preventDefault();
+            switchAuthTab('signup');
+          }
+        });
+      });
+    }
+
+    // Password visibility toggle buttons
+    document.querySelectorAll('.password-toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        if (!input) return;
+        const icon = this.querySelector('i');
+        if (input.type === 'password') {
+          input.type = 'text';
+          if (icon) {
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+          }
+        } else {
+          input.type = 'password';
+          if (icon) {
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+          }
+        }
+      });
+    });
+  }
+
+  initUnifiedAuth();
+
+  // ==========================================
   // SIGNUP FORM
   // ==========================================
 
@@ -486,12 +646,14 @@ document.addEventListener('DOMContentLoaded', function() {
       if (password !== confirmPass) {
         feedback.textContent = 'Passwords do not match.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
       if (password.length < 6) {
         feedback.textContent = 'Password must be at least 6 characters.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -499,6 +661,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (users.find(u => u.username === username || u.email === email)) {
         feedback.textContent = 'Username or Email already exists.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -506,9 +669,30 @@ document.addEventListener('DOMContentLoaded', function() {
       users.push(newUser);
       localStorage.setItem('aura_users', JSON.stringify(users));
 
-      feedback.textContent = 'Account created successfully! Redirecting to login...';
+      feedback.textContent = 'Account created successfully! Switching to sign in...';
       feedback.className = 'form-feedback success';
-      setTimeout(function() { window.location.href = 'login.html'; }, 1500);
+      feedback.style.display = 'block';
+
+      setTimeout(function() {
+        if (typeof switchAuthTab === 'function') {
+          switchAuthTab('login');
+          const loginUserField = document.getElementById('login-username');
+          const loginPassField = document.getElementById('login-password');
+          if (loginUserField) loginUserField.value = username;
+          if (loginPassField) {
+            loginPassField.value = '';
+            loginPassField.focus();
+          }
+          const loginFeedback = document.getElementById('login-feedback');
+          if (loginFeedback) {
+            loginFeedback.textContent = 'Account created successfully! Please sign in with your password.';
+            loginFeedback.className = 'form-feedback success';
+            loginFeedback.style.display = 'block';
+          }
+        } else {
+          window.location.href = 'login.html';
+        }
+      }, 1200);
     });
   }
 
@@ -527,6 +711,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!username || !password) {
         feedback.textContent = 'Please enter username and password.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -536,6 +721,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!user) {
         feedback.textContent = 'Invalid username or password.';
         feedback.className = 'form-feedback error';
+        feedback.style.display = 'block';
         return;
       }
 
@@ -543,6 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
       updateNavbarAuth();
       feedback.textContent = 'Login successful! Redirecting...';
       feedback.className = 'form-feedback success';
+      feedback.style.display = 'block';
       setTimeout(function() { window.location.href = 'index.html'; }, 1000);
     });
   }
