@@ -1985,29 +1985,29 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: radial-gradient(circle, #f5a623 0%, #d48806 100%);
   color: #121212;
-  font-size: 13px;
+  font-size: 17px;
   line-height: 1;
-  margin-right: 7px;
-  box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
-  vertical-align: -3px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 0 12px rgba(245, 166, 35, 0.55);
+  vertical-align: middle;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .nav-link:hover .nav-user-avatar {
-  transform: scale(1.12);
-  box-shadow: 0 0 14px rgba(245, 166, 35, 0.85);
+  transform: scale(1.15);
+  box-shadow: 0 0 16px rgba(245, 166, 35, 0.9);
+  background: radial-gradient(circle, #ffb53f 0%, #e0920a 100%);
 }
 
 .mobile-drawer .nav-user-avatar {
-  width: 26px;
-  height: 26px;
-  font-size: 14px;
-  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  font-size: 18px;
 }
 #profile-link,
 #logout-link,
