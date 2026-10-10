@@ -253,11 +253,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const linkPage = href.split('/').pop().split('?')[0].split('#')[0];
       
       if (pageName === 'login.html') {
-        const urlParams = new URLSearchParams(window.location.search);
-        const activeTab = urlParams.get('tab') || urlParams.get('mode') || (window.location.hash === '#signup' ? 'signup' : 'login');
-        if (activeTab === 'signup' && (link.id === 'signup-link' || link.id === 'mobile-signup-link')) {
-          link.classList.add('active');
-        } else if (activeTab !== 'signup' && (link.id === 'login-link' || link.id === 'mobile-login-link')) {
+        if (link.id === 'login-link' || link.id === 'mobile-login-link') {
           link.classList.add('active');
         }
       } else if (linkPage === pageName || (pageName === '' && linkPage === 'index.html')) {
@@ -511,8 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       document.title = 'Create Account — Aura Resort';
 
-      document.querySelectorAll('#login-link, #mobile-login-link').forEach(function(l) { l.classList.remove('active'); });
-      document.querySelectorAll('#signup-link, #mobile-signup-link').forEach(function(l) { l.classList.add('active'); });
+      document.querySelectorAll('#login-link, #mobile-login-link').forEach(function(l) { l.classList.add('active'); });
 
       if (window.history && window.history.replaceState) {
         window.history.replaceState(null, '', 'login.html?tab=signup');
@@ -528,7 +523,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       document.title = 'Login & Sign Up — Aura Resort';
 
-      document.querySelectorAll('#signup-link, #mobile-signup-link').forEach(function(l) { l.classList.remove('active'); });
       document.querySelectorAll('#login-link, #mobile-login-link').forEach(function(l) { l.classList.add('active'); });
 
       if (window.history && window.history.replaceState) {
@@ -568,8 +562,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (tabParam === 'signup' || hash === '#signup') {
         switchAuthTab('signup');
-      } else {
+      } else if (tabParam === 'login' || hash === '#login') {
         switchAuthTab('login');
+      } else {
+        // Smart behavior: If no accounts exist yet in browser -> open Sign Up; otherwise Sign In
+        const existingUsers = getUsers();
+        if (!existingUsers || existingUsers.length === 0) {
+          switchAuthTab('signup');
+        } else {
+          switchAuthTab('login');
+        }
       }
 
       // Intercept clicks on login/signup navbar buttons while on login.html to switch tabs smoothly

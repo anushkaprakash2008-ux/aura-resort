@@ -1981,6 +1981,34 @@ img {
 }
 
 /* --- AUTH --- */
+.nav-user-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5a623 0%, #d48806 100%);
+  color: #121212;
+  font-size: 13px;
+  line-height: 1;
+  margin-right: 7px;
+  box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+  vertical-align: -3px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav-link:hover .nav-user-avatar {
+  transform: scale(1.12);
+  box-shadow: 0 0 14px rgba(245, 166, 35, 0.85);
+}
+
+.mobile-drawer .nav-user-avatar {
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  margin-right: 10px;
+}
 #profile-link,
 #logout-link,
 #mobile-profile-link,
